@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     
@@ -11,12 +11,32 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public float jump;
     public float crouch;
+    public PlayerHealthController Health;
+
+    
 
     private Rigidbody2D rb2d;
     private void Awake()
     {
         Debug.Log("Player Controller awake");
         rb2d = gameObject.GetComponent<Rigidbody2D>();
+    }
+    public void HurtPlayer()
+    {
+        Health.ReduceHealth();
+    }
+    public void KillPlayer()
+    {
+        Debug.Log("Player got killed by chomper");
+        //Destroy(gameObject);
+        animator.SetBool("Died",true);
+        Invoke("ReloadLevel", 1.0f);
+       
+    }
+
+    public void ReloadLevel()
+    {
+        SceneManager.LoadScene(1);
     }
     public void PickUpKey()
     {
@@ -35,6 +55,7 @@ public class PlayerController : MonoBehaviour
         float crouch = Input.GetAxisRaw("Crouch"); //made a different instruction for this
         MoveCharacter(horizontal, vertical, crouch);
         PlayMovementAnimation(horizontal, vertical, crouch);
+
     }
 
     private void MoveCharacter(float horizontal, float vertical, float crouch)
@@ -71,8 +92,11 @@ public class PlayerController : MonoBehaviour
         }
         transform.localScale = scale;
 
-        
-        if (vertical > 0)
+        animator.SetBool("Jump", vertical > 0);
+        animator.SetBool("Crouch", crouch > 0);
+
+  
+        /* if (vertical > 0)
         {
             animator.SetBool("Jump", true);
            
@@ -92,8 +116,10 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("Crouch", false);
 
-        }
+        } */
 
     }
+
+
 }
 

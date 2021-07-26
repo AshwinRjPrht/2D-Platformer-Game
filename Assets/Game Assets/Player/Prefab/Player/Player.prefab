@@ -42,7 +42,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.33962262, g: 0.04645782, b: 0.24631168, a: 0}
+  m_BackGroundColor: {r: 0.53960484, g: 0.75938, b: 0.8113208, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 1443689304}
   - component: {fileID: 1443689306}
   - component: {fileID: 1443689309}
+  - component: {fileID: 272941603}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -252,3 +253,26 @@ MonoBehaviour:
   speed: 20
   jump: 20
   crouch: 0
+  Health: {fileID: 272941603}
+--- !u!114 &272941603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823535411764590844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 134cfda70b878fb4ab6cf67161d61052, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
+  numofhearts: 3
+  hearts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  emptyhearts: []
+  fullhealth: {fileID: 21300010, guid: fc49794cc535bef4f969645c4eb97b80, type: 3}
+  emptyheart: {fileID: 21300000, guid: fc49794cc535bef4f969645c4eb97b80, type: 3}
+  playerController: {fileID: 1443689309}
