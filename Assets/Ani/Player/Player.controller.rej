@@ -1,0 +1,16 @@
+diff a/Assets/Ani/Player/Player.controller b/Assets/Ani/Player/Player.controller	(rejected hunks)
+@@ -99,10 +99,14 @@
+   - serializedVersion: 1
+     m_State: {fileID: 161064210517729219}
+     m_Position: {x: -200, y: 390, z: 0}
++  - serializedVersion: 1
++    m_State: {fileID: -244427889647785659}
++    m_Position: {x: 140, y: 810, z: 0}
+   m_ChildStateMachines: []
+   m_AnyStateTransitions:
+   - {fileID: -4131764500439574959}
+   - {fileID: -1898866634633528466}
++  - {fileID: -1348630582862434661}
+   m_EntryTransitions: []
+   m_StateMachineTransitions: {}
+   m_StateMachineBehaviours: []
