@@ -7,7 +7,8 @@ public class PlayerController : MonoBehaviour
     
     public Animator animator;
     public ScoreController scoreController;
-
+    public GameOverController gameOverController;
+ 
     public float speed;
     public float jump;
     public float crouch;
@@ -30,26 +31,20 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Player got killed by chomper");
         //Destroy(gameObject);
         animator.SetBool("Died",true);
-        Invoke("ReloadLevel", 1.0f);
-       
+        gameOverController.PlayerDied();
+        this.enabled = false;
     }
 
-    public void ReloadLevel()
-    {
-        SceneManager.LoadScene(1);
-    }
     public void PickUpKey()
     {
         Debug.Log("Player picked up the key");
         scoreController.IncreaseScore(10);
     }
-   // private void OnCollisionEnter2D(Collision2D collision)
-   // {
-   //     Debug.Log("Collision: " + collision.gameObject.name);
-   // }
+   
 
     private void Update()
     {
+     
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Jump");
         float crouch = Input.GetAxisRaw("Crouch"); //made a different instruction for this
@@ -68,7 +63,7 @@ public class PlayerController : MonoBehaviour
         //move characer vertically
         if(vertical > 0)
         {
-            rb2d.AddForce(new Vector2(0f, jump), ForceMode2D.Force);
+            rb2d.AddForce(new Vector2(2f, jump), ForceMode2D.Force);
         }
         if(crouch > 0)
         {
@@ -94,29 +89,6 @@ public class PlayerController : MonoBehaviour
 
         animator.SetBool("Jump", vertical > 0);
         animator.SetBool("Crouch", crouch > 0);
-
-  
-        /* if (vertical > 0)
-        {
-            animator.SetBool("Jump", true);
-           
-        }
-        else
-        {
-            animator.SetBool("Jump", false);
-          
-        }
-
-        if (crouch >0)
-        {
-            animator.SetBool("Crouch", true);
-
-        }
-        else
-        {
-            animator.SetBool("Crouch", false);
-
-        } */
 
     }
 
