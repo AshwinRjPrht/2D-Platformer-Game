@@ -8,21 +8,19 @@ public class GameOverController : MonoBehaviour
 {
     public Button buttonRestart;
     public Button buttonLobby;
+    public GameObject GameOver;
 
     private void Awake()
      {
        
-       buttonRestart.onClick.AddListener(Wt);
+       buttonRestart.onClick.AddListener(ReloadLevel);
        buttonLobby.onClick.AddListener(Lobby);
   
     }
     public void PlayerDied()
     {
-        gameObject.SetActive(true);
-    }
-    public void Wt()
-    {
-        Invoke("ReloadLevel", 2f);
+        //gameObject.SetActive(true);
+        GameOver.SetActive(true);
     }
    
     private void ReloadLevel()

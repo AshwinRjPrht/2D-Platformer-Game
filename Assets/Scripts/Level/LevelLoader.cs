@@ -19,7 +19,24 @@ public class LevelLoader : MonoBehaviour
 
     private void onClick()
     {
-        SceneManager.LoadScene(LevelName);
+        LevelStatus levelStatus = LevelManager.Instance.GetLevelStatus(LevelName);
+        //SceneManager.LoadScene(LevelName);
+        switch (levelStatus)
+        {
+            case LevelStatus.Locked:
+                Debug.Log("You're Not Worthy");
+                break;
+
+            case LevelStatus.Unlocked:
+                Debug.Log("Quest is looking forward");
+                SceneManager.LoadScene(LevelName);
+                break;
+
+            case LevelStatus.Completed:
+                Debug.Log("Conquered");
+                SceneManager.LoadScene(LevelName);
+                break;
+        }
     }
 }
 
