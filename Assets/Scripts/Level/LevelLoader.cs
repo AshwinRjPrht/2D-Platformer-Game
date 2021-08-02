@@ -28,6 +28,7 @@ public class LevelLoader : MonoBehaviour
                 break;
 
             case LevelStatus.Unlocked:
+                SoundManager.Instance.Play(Sounds.ButtonClick);
                 Debug.Log("Quest is looking forward");
                 SceneManager.LoadScene(LevelName);
                 break;

@@ -59,9 +59,9 @@ public class PlayerController : MonoBehaviour
         Vector3 position = transform.position;
         position.x += horizontal * speed * Time.deltaTime;
         transform.position = position;
-
+        SoundManager.Instance.Play(Sounds.ButtonClick);
         //move characer vertically
-        if(vertical > 0)
+        if (vertical > 0)
         {
             rb2d.AddForce(new Vector2(2f, jump), ForceMode2D.Force);
         }
