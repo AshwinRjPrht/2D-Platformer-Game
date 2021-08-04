@@ -6910,6 +6910,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameOver
       objectReference: {fileID: 0}
+    - target: {fileID: 6797760436214036881, guid: 18f730f8f045296449183cdc241d8b22,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6797760436214036882, guid: 18f730f8f045296449183cdc241d8b22,
         type: 3}
       propertyPath: m_Pivot.x
@@ -7398,14 +7403,6 @@ PrefabInstance:
       propertyPath: hearts.Array.data[2]
       value: 
       objectReference: {fileID: 682353068}
-    - target: {fileID: 1443689308, guid: 460ea4a79a840ff4fb77b8ef5949fe3a, type: 3}
-      propertyPath: m_Mass
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1443689309, guid: 460ea4a79a840ff4fb77b8ef5949fe3a, type: 3}
-      propertyPath: jump
-      value: 60
-      objectReference: {fileID: 0}
     - target: {fileID: 1443689309, guid: 460ea4a79a840ff4fb77b8ef5949fe3a, type: 3}
       propertyPath: scoreController
       value: 
