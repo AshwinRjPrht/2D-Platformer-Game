@@ -49,7 +49,7 @@ public class PlayerHealthController : MonoBehaviour
     }
     public void ReduceHealth()
     {
-        if(health == 0)
+        if(health == 1)
         {
             playerController.KillPlayer();
         }

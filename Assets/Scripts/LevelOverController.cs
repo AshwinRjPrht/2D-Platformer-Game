@@ -10,6 +10,7 @@ public class LevelController : MonoBehaviour
         if(collision.gameObject.GetComponent<PlayerController>() != null)
         {
             Debug.Log("Level finished by the player");
+            Invoke("ReloadLevel", 1.0f);
         }
     }
 }
