@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 502722065}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: AttackPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 502722064}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.161, y: 1.087, z: 0}
+  m_LocalPosition: {x: 2.08, y: 0.86, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6169938386531183050}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 711641022}
   - component: {fileID: 916456131}
   - component: {fileID: 916456130}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Ground
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -110,7 +110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1646952248}
   - component: {fileID: 1646952247}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 29
+  field of view: 26
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 1443689309}
   - component: {fileID: 272941603}
   - component: {fileID: 1914952295}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -351,7 +351,7 @@ MonoBehaviour:
   feet: {fileID: 711641022}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 256
   Health: {fileID: 272941603}
 --- !u!114 &272941603
 MonoBehaviour:
@@ -389,9 +389,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   combatEnabled: 1
   inputTimer: 0.2
-  attack1Radius: 0.8
+  attack1Radius: 5
   attack1Damage: 10
   attackHitBoxPos: {fileID: 502722065}
   whatIsDamageable:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512

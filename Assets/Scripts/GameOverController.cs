@@ -21,7 +21,7 @@ public class GameOverController : MonoBehaviour
     {
        
         gameObject.SetActive(true);
-        SoundManager.Instance.PlayMusic(Sounds.PlayerDeath);
+        //SoundManager.Instance.PlayMusic(Sounds.PlayerDeath);
         //GameOver.SetActive(true);
     }
    
@@ -34,7 +34,7 @@ public class GameOverController : MonoBehaviour
     
     private void Lobby()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
       
     }
 }

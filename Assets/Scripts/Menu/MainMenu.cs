@@ -14,7 +14,7 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.LoadScene(1);
-        SoundManager.Instance.Play(Sounds.ButtonClick);
+        //SoundManager.Instance.Play(Sounds.ButtonClick);
     }
 }
 

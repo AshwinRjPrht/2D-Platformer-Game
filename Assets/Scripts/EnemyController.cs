@@ -4,67 +4,184 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public float speed;
-    public float distance;
-    private bool movright = true;
-    public Transform groundDetection;
 
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private enum State
     {
-        if (collision.gameObject.GetComponent<PlayerController>() != null)
-        {
-            PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
-            playerController.HurtPlayer();
-
-        }
+        Walking,
+        KnockBack,
+        Dead
     }
+    private State currentState;
+    [SerializeField]
+    private float groundCheckDistance, movementSpeed, maxHealth, knockbackDuration;
+    [SerializeField]
+    private Transform groundcheck;
+    [SerializeField]
+    private LayerMask whatIsGround;
+    [SerializeField]
+    private Vector2 knockbackSpeed;
+    private float currentHealth, knockbackStartTime;
+    private int FacingDirection, DamageDirection;
+    private RaycastHit2D groundDetected;
+    private GameObject alive;
+    private Rigidbody2D aliveRB;
+    private Vector2 movement;
+    private Animator aliveAnim;
+    
+    
+    private void Start()
+    {
+        alive = transform.Find("Alive").gameObject;
+        aliveRB = alive.GetComponent<Rigidbody2D>();
+        aliveAnim = alive.GetComponent<Animator>();
+
+        currentHealth = maxHealth;
+        FacingDirection = 1;
+    }
+
+   
+
+
     private void Update()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
-
-        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance);
-        if (groundInfo.collider == false)
+        switch (currentState)
         {
-            if(movright == true)
-            {
-                transform.eulerAngles = new Vector3(0, -180, 0);
-                movright = false;
-            }
-            else
-            {
-                transform.eulerAngles = new Vector3(0, 0, 0);
-                movright = true;
-            }
+            case State.Walking:
+                UpdateWalkingState();
+                break;
+            case State.KnockBack:
+                UpdateKnockBackState();
+                break;
+            case State.Dead:
+                UpdateDeadState();
+                break;
+
         }
     }
-   
-    /*void Update()
+    //------------------------WALKING STATE-----------------------------------
+    private void EnterWalkingState()
     {
-        if (movright)
+
+    }
+
+    private void UpdateWalkingState()
+    {
+        groundDetected = Physics2D.Raycast(groundcheck.position, Vector2.down, groundCheckDistance, whatIsGround);
+        if (groundDetected.collider == false)
         {
-            transform.Translate(3 * Time.deltaTime * speed, 0, 0);
-            transform.localScale = new Vector2(3, 3);
+            Flip();//flip
         }
         else
         {
-            transform.Translate(-3 * Time.deltaTime * speed, 0, 0);
-            transform.localScale = new Vector2(-3, 3);
+            movement.Set(movementSpeed * FacingDirection, aliveRB.velocity.y);
+            aliveRB.velocity = movement;               //move
         }
     }
-    void OnTriggerEnter2D(Collider2D trig)
+    private void ExitWalkingState()
     {
-        if (trig.gameObject.CompareTag("turn"))
+
+    }
+
+    //--------------------------KNOCKBACK STATE-------------------------------
+    private void EnterKnockBackState()
+    {
+        knockbackStartTime = Time.time;
+        movement.Set(knockbackSpeed.x * DamageDirection, knockbackSpeed.y);
+        aliveRB.velocity = movement;
+        aliveAnim.SetBool("KnockBack", true);
+    }
+
+    private void UpdateKnockBackState()
+    {
+        if( Time.time >= knockbackStartTime + knockbackDuration)
         {
-            if (movright)
-            {
-                movright = false;
-            }
-            else
-            {
-                movright = true;
-            }
+            SwitchState(State.Walking);
         }
+    }
+
+    private void ExitKnockBackState()
+    {
+        aliveAnim.SetBool("KnockBack", false);
+    }
+    //---------------------------DEAD STATE-----------------------------------
+    private void EnterDeadState()
+    {
+        Destroy(gameObject);
+    }
+
+    private void UpdateDeadState()
+    {
+
+    }
+    private void ExitDeadState()
+    {
+
+    }
+    //---------------------------OTHER FUNCTIONS------------------------------
+    private void Damage(float[] attackDetails)
+    {
+        currentHealth -= attackDetails[0];
+
+        if(attackDetails[1] > alive.transform.position.x)
+        {
+            DamageDirection = -1;
+        }
+        else
+        {
+            DamageDirection = 1;
+        }
+
+        //Hit Particle
+        if(currentHealth > 0.0f)
+        {
+            SwitchState(State.KnockBack);
+        }
+        else if(currentHealth<= 0.0f)
+        {
+            SwitchState(State.Dead);
+        }
+
+    }
+    private void Flip()
+    {
+        FacingDirection *= -1;
+        alive.transform.Rotate(0.0f, 180.0f,0.0f);
+    }
+    private void SwitchState(State state)
+    {
+        switch (currentState)
+        {
+            case State.Walking:
+                ExitWalkingState();
+                break;
+            case State.KnockBack:
+                ExitKnockBackState();
+                break;
+            case State.Dead:
+                ExitDeadState();
+                break;
+        }
+        switch (state)
+        {
+            case State.Walking:
+                EnterWalkingState();
+                break;
+            case State.KnockBack:
+                EnterKnockBackState();
+                break;
+            case State.Dead:
+                EnterDeadState();
+                break;
+        }
+        currentState = state;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(groundcheck.position, new Vector2(groundcheck.position.x, groundcheck.position.y - groundCheckDistance));
       
-    }*/
+
+    }
+
+
 }
