@@ -4,7 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - turn
+  - Ground
+  - Enemy
+  - Platform
   layers:
   - Default
   - TransparentFX
@@ -14,14 +16,14 @@ TagManager:
   - UI
   - 
   - 
-  - Enemy1
+  - Ground
+  - Damageable
+  - Dead
+  - Player
+  - Enemy
+  - Interactable
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Background
   - 
   - 
   - 
@@ -42,11 +44,11 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Player
-    uniqueID: 174692735
+  - name: Background
+    uniqueID: 1224133809
     locked: 0
-  - name: Enemy
-    uniqueID: 2445520071
+  - name: Flying objects
+    uniqueID: 55315047
     locked: 0
   - name: Ground
     uniqueID: 73226155
